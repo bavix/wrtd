@@ -1,0 +1,24 @@
+network:
+  wan0:
+    method: dialer
+    network: tcp
+    address:
+      - 8.8.8.8:53
+      - 1.1.1.1:53
+  #    timeout: 100ms # default
+  #    timer: 30s # default
+  lan:
+    method: dialer
+    network: tcp
+    timeout: 5ms
+    timer: 1s
+  tun0:
+    method: dialer
+    network: udp
+    timeout: 120ms
+    timer: 5s
+  tun1:
+    method: dialer
+    network: udp
+    timeout: 70ms
+    timer: 5s
