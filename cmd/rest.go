@@ -18,7 +18,7 @@ func NewRestServer(
 	c *app.Checker,
 	log *zap.Logger,
 ) *http.Server {
-	srv := &http.Server{Addr: ":8080", Handler: mux} //nolint:gosec
+	srv := &http.Server{Addr: ":3333", Handler: mux} //nolint:gosec
 
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
