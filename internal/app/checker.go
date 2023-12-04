@@ -146,7 +146,7 @@ func (c *Checker) getAddress(configure Configure) string {
 			zap.String("interface", configure.Interface),
 			zap.String("ipaddr", value))
 
-		return value
+		return value + ":80"
 	}
 
 	return ""
