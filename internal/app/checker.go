@@ -67,6 +67,7 @@ func NewChecker(list CheckList, logger *zap.Logger) *Checker {
 	}
 }
 
+//nolint:funlen
 func (c *Checker) Run(ctx context.Context) {
 	var wg sync.WaitGroup
 
@@ -92,6 +93,20 @@ func (c *Checker) Run(ctx context.Context) {
 			},
 		})
 
+		counter := promauto.NewCounterVec(prometheus.CounterOpts{
+			Name: "dialer_total",
+			Help: "Processed requests",
+			ConstLabels: map[string]string{
+				"interface": configure.Interface,
+				"network":   configure.Network,
+				"ipaddr":    ipaddr,
+				"hostname":  hostname,
+			},
+		}, []string{"type"})
+
+		counterOK := counter.WithLabelValues("ok")
+		counterErr := counter.WithLabelValues("error")
+
 		go func() {
 			defer wg.Done()
 
@@ -107,6 +122,8 @@ func (c *Checker) Run(ctx context.Context) {
 						zap.String("ipaddr", ipaddr),
 						zap.Time("triggered", triggered))
 
+					counterErr.Inc()
+
 					return
 				}
 
@@ -115,6 +132,8 @@ func (c *Checker) Run(ctx context.Context) {
 					zap.String("ipaddr", ipaddr),
 					zap.Duration("elapsed", elapsed),
 					zap.Time("triggered", triggered))
+
+				counterOK.Inc()
 
 				histogram.Observe(elapsed.Seconds())
 			})
