@@ -7,7 +7,7 @@ require (
 	github.com/digineo/go-uci v0.0.0-20210918132103-37c7b10c14fa
 	github.com/prometheus/client_golang v1.20.4
 	go.uber.org/config v1.4.0
-	go.uber.org/fx v1.22.2
+	go.uber.org/fx v1.23.0
 	go.uber.org/zap v1.27.0
 )
 
