@@ -8,7 +8,7 @@ require (
 	github.com/prometheus/client_golang v1.21.1
 	go.uber.org/config v1.4.0
 	go.uber.org/fx v1.24.0
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.27.1
 )
 
 require (
